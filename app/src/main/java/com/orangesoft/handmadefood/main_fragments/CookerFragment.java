@@ -76,10 +76,6 @@ public class CookerFragment  extends Fragment  implements
         catch (Exception ex){
 
         }
-        getActivity().getActionBar().setSelectedNavigationItem(0);
-        String FROM1 = "Id, First_name, Surname, About_me, Type, Avatar_medium, Avatar_w220";
-        String query = "SELECT " + FROM1 + " FROM " + TABLE_USER_NAME;
-        setDataInDB(query);
     }
     private void serverLoader(){
         new AsyncTask<Void, Void, String>() {
@@ -104,11 +100,14 @@ public class CookerFragment  extends Fragment  implements
     @Override
     public void onStart() {
         super.onStart();
-
+        getActivity().getActionBar().setSelectedNavigationItem(0);
+        String FROM1 = "Id, First_name, Surname, About_me, Type, Avatar_medium, Avatar_w220";
+        String query = "SELECT " + FROM1 + " FROM " + TABLE_USER_NAME;
+        setDataInDB(query);
     }
 
     public void setDataInDB(String query){
-        SQLiteDatabase db = dataBaseHandler.getReadableDatabase();
+        SQLiteDatabase db = dataBaseHandler.getWritableDatabase();
         Cursor cursor2 = db.rawQuery(query, null);
         allAvtors = new User[cursor2.getCount()];
         int countElem = 0;

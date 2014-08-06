@@ -119,7 +119,7 @@ public class SearchFragment extends Fragment implements
                     serverLoader(0);
                 }
                 catch (Exception ex){}
-                SQLiteDatabase db = dataBaseHandler.getReadableDatabase();
+                SQLiteDatabase db = dataBaseHandler.getWritableDatabase();
                 String FROM1 = "Id,Title,Rss_title, Content, Cook_time, Servings_number, Slug, General_image, Ingredients, Ingredient_categories, Food_categories"; //
                 String query = "SELECT " + FROM1 + " FROM " + TABLE_RECIPES_NAME;
                 Cursor cursor2 = db.rawQuery(query, null);
@@ -154,7 +154,7 @@ public class SearchFragment extends Fragment implements
                 catch (Exception ex){}
                 String FROM1 = "Id, Title, About, Address, Latitude, Longitude,  Slug, Contacts, Image_big, Image_square";
                 String query = "SELECT " + FROM1 + " FROM " + TABLE_RESTORAN_NAME;
-                SQLiteDatabase db = dataBaseHandler.getReadableDatabase();
+                SQLiteDatabase db = dataBaseHandler.getWritableDatabase();
                 Cursor cursor = db.rawQuery(query, null);
 
                 RestoranFragment.allRestorans = new Restaurant[cursor.getCount()];
@@ -185,7 +185,7 @@ public class SearchFragment extends Fragment implements
                 catch (Exception ex){}
                 String FROM1 = "Id, First_name, Surname, About_me, Type, Avatar_medium, Avatar_w220";
                 String query = "SELECT " + FROM1 + " FROM " + TABLE_USER_NAME;
-                SQLiteDatabase db = dataBaseHandler.getReadableDatabase();
+                SQLiteDatabase db = dataBaseHandler.getWritableDatabase();
                 Cursor cursor2 = db.rawQuery(query, null);
                 CookerFragment.allAvtors = new User[cursor2.getCount()];
                 int countElem = 0;
@@ -219,15 +219,27 @@ public class SearchFragment extends Fragment implements
             @Override
             public boolean onQueryTextSubmit(String s) {
                 Log.d(LOG_TAG, s);
+
+                hideKeyboard();
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                if (s.length()>0){
+                s = s.substring(0, 1).toUpperCase() + s.substring(1);
+                gvMain = (GridView) getView().findViewById(R.id.gridView);
+                gvMain.setVisibility(View.VISIBLE);
+
                 switch (flag){
                     case 0:{
                         String FROM1 = "Id ,Title,Rss_title, Content, Cook_time, Servings_number, Slug, General_image, Ingredients, Ingredient_categories, Food_categories";
                         String query = "SELECT " + FROM1 + " FROM " + TABLE_RECIPES_NAME +" WHERE "+ Title +" LIKE '" +s+"%' " ;
-                        SQLiteDatabase db = dataBaseHandler.getReadableDatabase();
+                        SQLiteDatabase db = dataBaseHandler.getWritableDatabase();
                         Cursor cursor2 = db.rawQuery(query, null);
 
 
-                       final Recipe[] searchRecipes = new Recipe[cursor2.getCount()];
+                        final Recipe[] searchRecipes = new Recipe[cursor2.getCount()];
                         int countElem = 0;
                         while (cursor2.moveToNext()) {
                             searchRecipes[countElem] = new Recipe();
@@ -247,7 +259,7 @@ public class SearchFragment extends Fragment implements
                             countElem++;
                         }
                         cursor2.close();
-                        gvMain = (GridView) getView().findViewById(R.id.gridView);
+
 
                         ArrayAdapter<Recipe> gridadapter = new ArrayAdapter<Recipe>(getActivity(), R.layout.grid_item, R.id.grid_text,searchRecipes ){
 
@@ -285,7 +297,7 @@ public class SearchFragment extends Fragment implements
 
                         String FROM1 = "Id, Title, About, Address, Latitude, Longitude,  Slug, Contacts, Image_big, Image_square";
                         String query = "SELECT " + FROM1 + " FROM " + TABLE_RESTORAN_NAME +" WHERE "+ Title +" LIKE '" +s+"%' ";
-                        SQLiteDatabase db = dataBaseHandler.getReadableDatabase();
+                        SQLiteDatabase db = dataBaseHandler.getWritableDatabase();
                         Cursor cursor = db.rawQuery(query, null);
 
                         final Restaurant[] searchRestorans = new Restaurant[cursor.getCount()];
@@ -306,7 +318,6 @@ public class SearchFragment extends Fragment implements
                             countElem++;
                         }
                         cursor.close();
-                        gvMain = (GridView) getView().findViewById(R.id.gridView);
                         ArrayAdapter<Restaurant> gridadapter = new ArrayAdapter<Restaurant>(getActivity(), R.layout.grid_item, R.id.grid_text, searchRestorans){
 
                             @Override
@@ -342,7 +353,7 @@ public class SearchFragment extends Fragment implements
 
                         String FROM1 = "Id, First_name, Surname, About_me, Type, Avatar_medium, Avatar_w220";
                         String query = "SELECT " + FROM1 + " FROM " + TABLE_USER_NAME +" WHERE "+ First_name +" LIKE '"+s+"%' OR " + Surname+" LIKE '"+s+"%' " ;
-                        SQLiteDatabase db = dataBaseHandler.getReadableDatabase();
+                        SQLiteDatabase db = dataBaseHandler.getWritableDatabase();
                         Cursor cursor2 = db.rawQuery(query, null);
                         final User[] searchAvtors = new User[cursor2.getCount()];
                         int countElem = 0;
@@ -358,7 +369,6 @@ public class SearchFragment extends Fragment implements
                             countElem++;
                         }
                         cursor2.close();
-                        gvMain = (GridView) getView().findViewById(R.id.gridView);
 
                         ArrayAdapter<User> gridadapter = new ArrayAdapter<User>(getActivity(), R.layout.grid_item, R.id.grid_text,searchAvtors ){
 
@@ -390,15 +400,13 @@ public class SearchFragment extends Fragment implements
                                 fragmentTransaction.commit();
                             }
                         });
-                        break;
+                        break;}
                     }
                 }
-                hideKeyboard();
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
+                else {
+                    gvMain = (GridView) getView().findViewById(R.id.gridView);
+                    gvMain.setVisibility(View.INVISIBLE);
+                }
                 return true;
             }
         });

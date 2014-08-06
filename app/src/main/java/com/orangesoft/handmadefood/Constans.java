@@ -48,4 +48,5 @@ public interface Constans extends BaseColumns {
     public static final String TABLE_RESTORAN_CATEGORY_NAME = "categories";
     public static final String TABLE_FAVORITE_NAME ="favorite" ;
 
+
 }

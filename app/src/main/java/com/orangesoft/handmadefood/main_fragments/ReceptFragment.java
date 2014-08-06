@@ -26,7 +26,6 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.orangesoft.handmadefood.DataBaseHandler;
-import com.orangesoft.handmadefood.FilterFragment;
 import com.orangesoft.handmadefood.FoodApplication;
 import com.orangesoft.handmadefood.R;
 import com.orangesoft.handmadefood.abstraction.Recipe;
@@ -76,12 +75,36 @@ public class ReceptFragment extends Fragment implements
         catch (Exception ex){
 
         }
-        SQLiteDatabase db = dataBaseHandler.getReadableDatabase();
+
+    }
+
+    private void serverLoader(){
+        new AsyncTask<Void, Void, String>() {
+            @Override
+            protected String doInBackground(Void... params) {
+                application = (FoodApplication) getActivity().getApplication();
+                restService = application.getRestService();
+                Recipe[] recipes = restService.getRecipe();
+                addEvent(recipes);
+                return null;
+            }
+            @Override
+            protected void onPostExecute(String content) {
+               try {
+                   onStart();
+               }
+               catch (Exception ex){
+               }
+            }
+        }.execute();
+    }
+    @Override
+    public void onStart() {
+        SQLiteDatabase db = dataBaseHandler.getWritableDatabase();
         String FROM1 = "Id ,Title,Rss_title, Content, Cook_time, Servings_number, Slug, General_image, Ingredients, Ingredient_categories, Food_categories"; //
         String query = "SELECT " + FROM1 + " FROM " + TABLE_RECIPES_NAME;
         Cursor cursor2 = db.rawQuery(query, null);
-
-
+        super.onStart();
         allRecipes = new Recipe[cursor2.getCount()];
         int countElem = 0;
         while (cursor2.moveToNext()) {
@@ -134,31 +157,6 @@ public class ReceptFragment extends Fragment implements
                 fragmentTransaction.commit();
             }
         });
-    }
-
-    private void serverLoader(){
-        new AsyncTask<Void, Void, String>() {
-            @Override
-            protected String doInBackground(Void... params) {
-                application = (FoodApplication) getActivity().getApplication();
-                restService = application.getRestService();
-                Recipe[] recipes = restService.getRecipe();
-                addEvent(recipes);
-                return null;
-            }
-            @Override
-            protected void onPostExecute(String content) {
-               try {
-                   onStart();
-               }
-               catch (Exception ex){
-               }
-            }
-        }.execute();
-    }
-    @Override
-    public void onStart() {
-        super.onStart();
 
 
     }

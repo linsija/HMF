@@ -75,11 +75,12 @@ public class DataBaseHandler extends SQLiteOpenHelper {
                 + Categories+ " TEXT," +Images +*/" TEXT);" );
 
         db.execSQL("CREATE TABLE " + TABLE_CATEGORY_NAME + " (" + Id
-                + " INTEGER, " + Name + " TEXT NOT NULL,"
+                + " INTEGER, " + Name + " TEXT,"
                 + Count +" INTEGER);" );
 
         db.execSQL("CREATE TABLE " + TABLE_FAVORITE_NAME + " (" + Id
                 + " INTEGER, "+Count+" INTEGER, "+ Title + " TEXT);" );
+
 
     }
 

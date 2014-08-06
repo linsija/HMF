@@ -75,7 +75,7 @@ public class FavoriteFragment extends Fragment implements
     @Override
     public void onStart() {
         super.onStart();
-        SQLiteDatabase db = dataBaseHandler.getReadableDatabase();
+        SQLiteDatabase db = dataBaseHandler.getWritableDatabase();
         String FROM1 = "Id, Count, Title"; //
         String query = "SELECT " + FROM1 + " FROM " + TABLE_FAVORITE_NAME;
         Cursor cursor2 = db.rawQuery(query, null);

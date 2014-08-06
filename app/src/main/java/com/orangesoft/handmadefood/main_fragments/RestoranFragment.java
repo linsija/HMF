@@ -108,15 +108,14 @@ private void serverLoader(){
             }
         }
     }.execute();
-    getActivity().getActionBar().setSelectedNavigationItem(0);
-    String FROM1 = "Id, Title, About, Address, Latitude, Longitude,  Slug, Contacts, Image_big, Image_square";
-    String query = "SELECT " + FROM1 + " FROM " + TABLE_RESTORAN_NAME;
-    setDataInDB(query);
 }
     @Override
     public void onStart() {
         super.onStart();
-
+        getActivity().getActionBar().setSelectedNavigationItem(0);
+        String FROM1 = "Id, Title, About, Address, Latitude, Longitude,  Slug, Contacts, Image_big, Image_square";
+        String query = "SELECT " + FROM1 + " FROM " + TABLE_RESTORAN_NAME;
+        setDataInDB(query);
 
     }
 
@@ -161,7 +160,7 @@ private void serverLoader(){
     }
 
 public void setDataInDB(String query){
-    SQLiteDatabase db = dataBaseHandler.getReadableDatabase();
+    SQLiteDatabase db = dataBaseHandler.getWritableDatabase();
     Cursor cursor = db.rawQuery(query, null);
 
     allRestorans = new Restaurant[cursor.getCount()];
