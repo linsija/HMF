@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">HandMadeFood</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="description">Описание</string>
+    <string name="сontains">Ингридиенты</string>
+    <string name="make">Приготовление</string>
+    <string name="adress">Адрес</string>
+    <string name="recepts">Рецепты</string>
+    <string name="restorans">Рестораны</string>
+    <string name="cokers">Повара</string>
+    <string name="search">Поиск</string>
+    <string name="general_ingridient">Основной ингридиент:</string>
+    <string name="picture">HANDMADEFOOD</string>
+    <string name="category">Категория блюда:</string>
+    <string name="recept">Рецепт</string>
+    <string name="restoran">Ресторан</string>
+    <string name="avtors">Авторы</string>
+    <string name="cooker">Шеф-повар</string>
+    <string name="biographi">Биография</string>
+    <string name="Moscow">Москва</string>
+    <string name="StP">Петербург</string>
+    <string name="allRestorans">Все рестораны</string>
+    <string name="Shef">Шеф-повара</string>
+    <string name="Kulinar">Кулинары</string>
+    <string name="allPovars">Все повара</string>
+    <string name="allRecepts">Все рецепты</string>
+    <string name="filter">Фильтр</string>
+    <string name="about">О проекте</string>
+    <string name="favorite">Любимое</string>
+    <string name="hand_made_food">HandMadeFood</string>
+    <string name="search_hint">поиск</string>
+
+</resources>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/frame"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <com.orangesoft.handmadefood.SquareImage xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/grid_picture"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="3dp"
+
+        android:scaleType="centerCrop"></com.orangesoft.handmadefood.SquareImage>
+
+
+    <TextView
+        android:id="@+id/grid_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:shadowColor="#000000"
+        android:shadowDx="1.0"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:shadowDy="1.0"
+        android:shadowRadius="29"
+        android:gravity="right"
+        tools:text="asd"
+        android:textColor="#ffffff" />
+
+</RelativeLayout>

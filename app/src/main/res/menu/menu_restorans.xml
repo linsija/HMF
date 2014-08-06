@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:yourapp="http://schemas.android.com/apk/res-auto"
+    >
+
+    <item
+        android:id="@+id/item1"
+        yourapp:showAsAction="ifRoom"
+        android:title="@string/Moscow">
+    </item>
+    <item
+        android:id="@+id/item2"
+        yourapp:showAsAction="ifRoom"
+        android:title="@string/StP">
+    </item>
+    <item
+        android:id="@+id/item3"
+        yourapp:showAsAction="ifRoom"
+        android:title="@string/allRestorans">
+    </item>
+
+
+</menu>

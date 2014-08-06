@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout android:id="@+id/sidemenu"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:layout_marginRight="290dp"
+    android:divider="@null"
+    android:dividerHeight="0px"
+    android:footerDividersEnabled="false"
+    android:headerDividersEnabled="false"
+    android:choiceMode="singleChoice"
+    android:background="#111111"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <include layout="@layout/buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/include">
+    </include>
+
+
+</LinearLayout>
