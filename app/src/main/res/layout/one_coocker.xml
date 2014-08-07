@@ -4,96 +4,99 @@
     android:background="#ffffff">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="2"
-        android:id="@+id/linearLayout">
+        android:weightSum="2">
 
         <ImageView
+            android:id="@+id/povar_photo"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/povar_photo"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <TextView
+            android:id="@+id/povar_name"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="15dp"
+            android:layout_weight="1"
             android:text="ИМЯ ПОВАРА"
-            android:id="@+id/povar_name"
-            android:layout_weight="1" />
+            android:textSize="15dp" />
     </LinearLayout>
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="fill_parent"
         android:layout_height="1px"
-        android:background="#696969"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/linearLayout"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        android:layout_below="@+id/textView2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/linearLayout2">
+        android:layout_below="@+id/linearLayout"
+        android:background="#696969" />
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:id="@+id/biographi"
-            android:text="@string/biographi"/>
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:background="#696969"
-            android:id="@+id/recepts_button"
-            android:textColor="#8B0000"
-            android:text="@string/recepts"/>
-    </LinearLayout>
-
-   <RelativeLayout
-       android:layout_width="fill_parent"
-       android:layout_height="wrap_content"
-       android:id="@+id/biographi_layout"
-       android:layout_alignParentLeft="true"
-       android:layout_alignParentStart="true"
-       android:layout_alignParentBottom="true"
-       android:layout_marginTop="20dp"
-       android:layout_marginLeft="20dp"
-       android:layout_marginRight="20dp"
-       android:layout_below="@+id/linearLayout2">
-       <ScrollView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content">
-       <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:id="@+id/biographi_text"
-           android:text="БИОГРАФИЯ ПОВАРА"/>
-       </ScrollView>
-       </RelativeLayout>
-
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView2"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/biographi"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/biographi" />
+
+        <TextView
+            android:id="@+id/recepts_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#696969"
+            android:gravity="center"
+            android:text="@string/recepts"
+            android:textColor="#8B0000" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/biographi_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp">
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/biographi_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="БИОГРАФИЯ ПОВАРА" />
+        </ScrollView>
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/recepts_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout2">
 
         <GridView
+            android:id="@+id/recept_gv"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/recept_gv"></GridView>
-        </RelativeLayout>
+            android:layout_height="wrap_content"></GridView>
+    </RelativeLayout>
 
 </RelativeLayout>

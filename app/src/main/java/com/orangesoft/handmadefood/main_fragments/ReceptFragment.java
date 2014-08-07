@@ -51,8 +51,8 @@ import static com.orangesoft.handmadefood.Constans.Title;
 public class ReceptFragment extends Fragment implements
         ActionBar.OnNavigationListener, ActionBar.TabListener, FilterClose {
 
-    private  GridView gvMain;
-    private  ArrayAdapter<Recipe> gridadapter;
+    private GridView gvMain;
+    private ArrayAdapter<Recipe> gridadapter;
     private FilterFragment filterFragment;
 
     private FoodApplication application;
@@ -60,7 +60,6 @@ public class ReceptFragment extends Fragment implements
 
     public static Recipe[] allRecipes;
     public DataBaseHandler dataBaseHandler;
-
 
 
     @Override
@@ -72,14 +71,13 @@ public class ReceptFragment extends Fragment implements
         bar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         try {
             serverLoader();
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
 
         }
 
     }
 
-    private void serverLoader(){
+    private void serverLoader() {
         new AsyncTask<Void, Void, String>() {
             @Override
             protected String doInBackground(Void... params) {
@@ -89,16 +87,17 @@ public class ReceptFragment extends Fragment implements
                 addEvent(recipes);
                 return null;
             }
+
             @Override
             protected void onPostExecute(String content) {
-               try {
-                   onStart();
-               }
-               catch (Exception ex){
-               }
+                try {
+                    onStart();
+                } catch (Exception ex) {
+                }
             }
         }.execute();
     }
+
     @Override
     public void onStart() {
         SQLiteDatabase db = dataBaseHandler.getWritableDatabase();
@@ -128,7 +127,7 @@ public class ReceptFragment extends Fragment implements
         cursor2.close();
         gvMain = (GridView) getView().findViewById(R.id.gridView);
 
-        gridadapter = new ArrayAdapter<Recipe>(getActivity(), R.layout.grid_item, R.id.grid_text,allRecipes ){
+        gridadapter = new ArrayAdapter<Recipe>(getActivity(), R.layout.grid_item, R.id.grid_text, allRecipes) {
 
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -138,7 +137,7 @@ public class ReceptFragment extends Fragment implements
                 textView.setText(allRecipes[position].title);
 
                 ImageView grid_picture = (ImageView) view.findViewById(R.id.grid_picture);
-                ImageLoader.getInstance().displayImage("http://handmadefood.ru/"+ allRecipes[position].general_image ,grid_picture);
+                ImageLoader.getInstance().displayImage("http://handmadefood.ru/" + allRecipes[position].general_image, grid_picture);
                 return view;
             }
         };
@@ -199,23 +198,23 @@ public class ReceptFragment extends Fragment implements
         SQLiteDatabase db = dataBaseHandler.getWritableDatabase();
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_RECIPES_NAME);
         db.execSQL("CREATE TABLE " + TABLE_RECIPES_NAME + " (" + Id
-                + " INTEGER, " + Title + " TEXT NOT NULL,"+ Rss_title + " TEXT,"
+                + " INTEGER, " + Title + " TEXT NOT NULL," + Rss_title + " TEXT,"
                 + Content + " TEXT," + Cook_time + " TEXT,"
-                + Servings_number + " TEXT,"+ Slug+ " TEXT,"
-                + General_image+ " TEXT," +Ingredients+ " TEXT,"
-                + Ingredient_categories+" TEXT,"+ Food_categories+ " TEXT);" );
+                + Servings_number + " TEXT," + Slug + " TEXT,"
+                + General_image + " TEXT," + Ingredients + " TEXT,"
+                + Ingredient_categories + " TEXT," + Food_categories + " TEXT);");
         Gson gson = new Gson();
 
-        for (int i=0; i<getrecipes.length;i++){
+        for (int i = 0; i < getrecipes.length; i++) {
             ContentValues values = new ContentValues();
             values.put(Id, getrecipes[i].id);
-            values.put(Title, getrecipes[i].title );
-            values.put(Rss_title, getrecipes[i].rss_title );
-            values.put( Content, getrecipes[i].content);
+            values.put(Title, getrecipes[i].title);
+            values.put(Rss_title, getrecipes[i].rss_title);
+            values.put(Content, getrecipes[i].content);
             values.put(Cook_time, getrecipes[i].cook_time);
-            values.put(Servings_number,getrecipes[i].servings_number );
-            values.put(Slug,getrecipes[i].slug );
-            values.put(General_image, getrecipes[i].general_image );
+            values.put(Servings_number, getrecipes[i].servings_number);
+            values.put(Slug, getrecipes[i].slug);
+            values.put(General_image, getrecipes[i].general_image);
 
             String ingridients = gson.toJson(getrecipes[i].ingridients, String[].class);
             values.put(Ingredients, ingridients);

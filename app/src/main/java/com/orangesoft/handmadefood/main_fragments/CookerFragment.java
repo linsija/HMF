@@ -40,8 +40,8 @@ import static com.orangesoft.handmadefood.Constans.Type;
 
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-public class CookerFragment  extends Fragment  implements
-        ActionBar.OnNavigationListener  {
+public class CookerFragment extends Fragment implements
+        ActionBar.OnNavigationListener {
 
     private GridView gvMain;
     private ArrayAdapter<User> gridadapter;
@@ -53,14 +53,14 @@ public class CookerFragment  extends Fragment  implements
     private FoodApplication application;
     private RestService restService;
 
-    private String[] data = new String[] { "Все повара", "Шеф-повара", "Кулинары"};
+    private String[] data = new String[]{"Все повара", "Шеф-повара", "Кулинары"};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-        number_item_avtor =0;
+        number_item_avtor = 0;
         dataBaseHandler = new DataBaseHandler(getActivity().getApplicationContext());
 
         ActionBar bar = getActivity().getActionBar();
@@ -72,12 +72,12 @@ public class CookerFragment  extends Fragment  implements
         bar.setListNavigationCallbacks(adapter, this);
         try {
             serverLoader();
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
 
         }
     }
-    private void serverLoader(){
+
+    private void serverLoader() {
         new AsyncTask<Void, Void, String>() {
             @Override
             protected String doInBackground(Void... params) {
@@ -87,12 +87,13 @@ public class CookerFragment  extends Fragment  implements
                 addEvent(avtors);
                 return null;
             }
+
             @Override
-            protected void onPostExecute(String content) { try {
-                onStart();
-            }
-            catch (Exception ex){
-            }
+            protected void onPostExecute(String content) {
+                try {
+                    onStart();
+                } catch (Exception ex) {
+                }
             }
         }.execute();
     }
@@ -106,14 +107,14 @@ public class CookerFragment  extends Fragment  implements
         getDataFromDB(query);
     }
 
-    public void getDataFromDB(String query){
+    public void getDataFromDB(String query) {
         SQLiteDatabase db = dataBaseHandler.getWritableDatabase();
         Cursor cursor2 = db.rawQuery(query, null);
         allAvtors = new User[cursor2.getCount()];
         int countElem = 0;
         while (cursor2.moveToNext()) {
             allAvtors[countElem] = new User();
-            allAvtors[countElem].id= cursor2.getInt(0);
+            allAvtors[countElem].id = cursor2.getInt(0);
             allAvtors[countElem].first_name = cursor2.getString(1);
             allAvtors[countElem].surname = cursor2.getString(2);
             allAvtors[countElem].about_me = cursor2.getString(3);
@@ -125,17 +126,17 @@ public class CookerFragment  extends Fragment  implements
         cursor2.close();
         gvMain = (GridView) getView().findViewById(R.id.gridView);
 
-        gridadapter = new ArrayAdapter<User>(getActivity(), R.layout.grid_item, R.id.grid_text,allAvtors ){
+        gridadapter = new ArrayAdapter<User>(getActivity(), R.layout.grid_item, R.id.grid_text, allAvtors) {
 
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
 
                 View view = super.getView(position, convertView, parent);
                 TextView textView = (TextView) view.findViewById(R.id.grid_text);
-                textView.setText(allAvtors[position].first_name+" "+ allAvtors[position].surname);
+                textView.setText(allAvtors[position].first_name + " " + allAvtors[position].surname);
 
                 ImageView grid_picture = (ImageView) view.findViewById(R.id.grid_picture);
-                ImageLoader.getInstance().displayImage("http://handmadefood.ru/"+ allAvtors[position].avatar_w220 ,grid_picture);
+                ImageLoader.getInstance().displayImage("http://handmadefood.ru/" + allAvtors[position].avatar_w220, grid_picture);
                 return view;
             }
         };
@@ -164,37 +165,37 @@ public class CookerFragment  extends Fragment  implements
         ((ActionBarActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         ((ActionBarActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(false);
 
-        View v = inflater.inflate(R.layout.recepts_layout,null);
+        View v = inflater.inflate(R.layout.recepts_layout, null);
         return v;
     }
 
     @Override
     public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-        switch (itemPosition){
-            case 0:
-            {
+        switch (itemPosition) {
+            case 0: {
                 String FROM1 = "Id, First_name, Surname, About_me, Type, Avatar_medium, Avatar_w220";
                 String query = "SELECT " + FROM1 + " FROM " + TABLE_USER_NAME;
                 getDataFromDB(query);
                 break;
             }
-            case 1:{
+            case 1: {
 
                 String FROM1 = "Id, First_name, Surname, About_me, Type, Avatar_medium, Avatar_w220";
-                String query = "SELECT " + FROM1 + " FROM " + TABLE_USER_NAME +" WHERE "+ Type +" LIKE 'Chie%' " ;
+                String query = "SELECT " + FROM1 + " FROM " + TABLE_USER_NAME + " WHERE " + Type + " LIKE 'Chie%' ";
                 getDataFromDB(query);
-                break;}
-            case 2:{
+                break;
+            }
+            case 2: {
                 String FROM1 = "Id, First_name, Surname, About_me, Type, Avatar_medium, Avatar_w220";
-                String query = "SELECT " + FROM1 + " FROM " + TABLE_USER_NAME +" WHERE "+ Type +" LIKE 'Coo%' " ;
+                String query = "SELECT " + FROM1 + " FROM " + TABLE_USER_NAME + " WHERE " + Type + " LIKE 'Coo%' ";
 
 
                 getDataFromDB(query);
-                break;}
+                break;
+            }
         }
         return false;
     }
-
 
 
     public void addEvent(User[] getusers) {
@@ -203,18 +204,18 @@ public class CookerFragment  extends Fragment  implements
         db.execSQL("CREATE TABLE " + TABLE_USER_NAME + " (" + Id
                 + " INTEGER, " + First_name + " TEXT,"
                 + Surname + " TEXT," + About_me + " TEXT,"
-                + Type + " TEXT," + Avatar_medium+ " TEXT,"
-                + Avatar_w220 +" TEXT);" );
+                + Type + " TEXT," + Avatar_medium + " TEXT,"
+                + Avatar_w220 + " TEXT);");
 
-        for (int i=0; i<getusers.length;i++){
+        for (int i = 0; i < getusers.length; i++) {
             ContentValues values = new ContentValues();
             values.put(Id, getusers[i].id);
-            values.put(First_name, getusers[i].first_name );
-            values.put(Surname, getusers[i].surname );
-            values.put( About_me, getusers[i].about_me);
+            values.put(First_name, getusers[i].first_name);
+            values.put(Surname, getusers[i].surname);
+            values.put(About_me, getusers[i].about_me);
             values.put(Type, getusers[i].type);
-            values.put(Avatar_medium,getusers[i].avatar_medium );
-            values.put(Avatar_w220, getusers[i].avatar_w220 );
+            values.put(Avatar_medium, getusers[i].avatar_medium);
+            values.put(Avatar_w220, getusers[i].avatar_w220);
             db.insertOrThrow(TABLE_USER_NAME, null, values);
         }
     }

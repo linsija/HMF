@@ -25,11 +25,11 @@ public class MainActivity extends ActionBarActivity implements Navigations {
     ImageView search;
     ImageView favorites;
 
-    LinearLayout  recept_layout;
-    LinearLayout  restorans_layout;
-    LinearLayout  coockers_layout;
-    LinearLayout  search_layout;
-    LinearLayout  favorites_layout;
+    LinearLayout recept_layout;
+    LinearLayout restorans_layout;
+    LinearLayout coockers_layout;
+    LinearLayout search_layout;
+    LinearLayout favorites_layout;
 
 
     Fragment receptFragment;
@@ -39,16 +39,15 @@ public class MainActivity extends ActionBarActivity implements Navigations {
     FavoriteFragment favoriteFragment;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(this));
 
-         getSupportActionBar().setTitle("");
-         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-         getSupportActionBar().setDisplayShowHomeEnabled(false);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
 
 
         SlidingMenu menu = new SlidingMenu(this);
@@ -93,7 +92,7 @@ public class MainActivity extends ActionBarActivity implements Navigations {
                 android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.conteiner, receptFragment);
-             //   fragmentTransaction.addToBackStack(null);
+                //   fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
                 recepts.setBackgroundResource(R.drawable.recepts1);
                 restorans.setBackgroundResource(R.drawable.restorans);
@@ -109,7 +108,7 @@ public class MainActivity extends ActionBarActivity implements Navigations {
                 android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.conteiner, restoranFragment);
-               // fragmentTransaction.addToBackStack(null);
+                // fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
                 recepts.setBackgroundResource(R.drawable.recepts);
                 restorans.setBackgroundResource(R.drawable.restorans1);
@@ -124,7 +123,7 @@ public class MainActivity extends ActionBarActivity implements Navigations {
                 android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.conteiner, cookerFragment);
-             //   fragmentTransaction.addToBackStack(null);
+                //   fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
                 recepts.setBackgroundResource(R.drawable.recepts);
                 restorans.setBackgroundResource(R.drawable.restorans);
@@ -154,7 +153,7 @@ public class MainActivity extends ActionBarActivity implements Navigations {
                 android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.conteiner, favoriteFragment);
-               // fragmentTransaction.addToBackStack(null);
+                // fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
                 recepts.setBackgroundResource(R.drawable.recepts);
                 restorans.setBackgroundResource(R.drawable.restorans);
@@ -187,7 +186,6 @@ public class MainActivity extends ActionBarActivity implements Navigations {
         }
         transaction.commit();
     }
-
 
 
 }

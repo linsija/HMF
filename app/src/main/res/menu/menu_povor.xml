@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:yourapp="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/itm1"
-        yourapp:showAsAction="always"
-        android:title="@string/Shef">
-    </item>
+        android:title="@string/Shef"
+        yourapp:showAsAction="always"></item>
     <item
         android:id="@+id/itm2"
-        yourapp:showAsAction="always"
-        android:title="@string/Kulinar">
-    </item>
+        android:title="@string/Kulinar"
+        yourapp:showAsAction="always"></item>
     <item
         android:id="@+id/itm3"
-        yourapp:showAsAction="always"
-        android:title="@string/allPovars">
-    </item>
+        android:title="@string/allPovars"
+        yourapp:showAsAction="always"></item>
 
 
 </menu>

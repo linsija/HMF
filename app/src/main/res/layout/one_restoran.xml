@@ -1,6 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
     xmlns:map="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#ffffff">
 
@@ -106,12 +106,11 @@
         android:layout_alignTop="@+id/description_layout_restoran">
 
 
-
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/map"
+            android:name="com.google.android.gms.maps.MapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:name="com.google.android.gms.maps.MapFragment"
             android:layout_above="@+id/linearLayout2" />
 
 

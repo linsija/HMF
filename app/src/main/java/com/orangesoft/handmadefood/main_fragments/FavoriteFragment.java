@@ -39,8 +39,8 @@ public class FavoriteFragment extends Fragment implements
     public static FavoriteRecipe[] favoriteRecipes;
     private static Recipe[] needElements;
     public DataBaseHandler dataBaseHandler;
-    private  GridView gvMain;
-    private  ArrayAdapter<Recipe> gridadapter;
+    private GridView gvMain;
+    private ArrayAdapter<Recipe> gridadapter;
     AboutFragment aboutFragment;
 
     @Override
@@ -57,7 +57,7 @@ public class FavoriteFragment extends Fragment implements
         ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle("");
         ((ActionBarActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         ((ActionBarActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(false);
-        View v = inflater.inflate(R.layout.recepts_layout,null);
+        View v = inflater.inflate(R.layout.recepts_layout, null);
         return v;
     }
 
@@ -80,29 +80,29 @@ public class FavoriteFragment extends Fragment implements
         String query = "SELECT " + FROM1 + " FROM " + TABLE_FAVORITE_NAME;
         Cursor cursor2 = db.rawQuery(query, null);
         favoriteRecipes = new FavoriteRecipe[cursor2.getCount()];
-        needElements =new Recipe[cursor2.getCount()];
+        needElements = new Recipe[cursor2.getCount()];
         int countElem = 0;
         while (cursor2.moveToNext()) {
             favoriteRecipes[countElem] = new FavoriteRecipe();
-            favoriteRecipes[countElem].title= cursor2.getString(2);
-            favoriteRecipes[countElem].count= cursor2.getInt(1);
+            favoriteRecipes[countElem].title = cursor2.getString(2);
+            favoriteRecipes[countElem].count = cursor2.getInt(1);
             countElem++;
         }
         cursor2.close();
-        int needCount= 0;
-        for (int i=0; i<favoriteRecipes.length;i++){
-            for (int k=0; k<ReceptFragment.allRecipes.length;k++){
+        int needCount = 0;
+        for (int i = 0; i < favoriteRecipes.length; i++) {
+            for (int k = 0; k < ReceptFragment.allRecipes.length; k++) {
 
-                if (favoriteRecipes[i].title.equals(ReceptFragment.allRecipes[k].title)){
-                    needElements[needCount]= new Recipe();
-                    needElements[needCount]=ReceptFragment.allRecipes[k];
+                if (favoriteRecipes[i].title.equals(ReceptFragment.allRecipes[k].title)) {
+                    needElements[needCount] = new Recipe();
+                    needElements[needCount] = ReceptFragment.allRecipes[k];
                     needCount++;
                 }
             }
         }
         gvMain = (GridView) getView().findViewById(R.id.gridView);
 
-        gridadapter = new ArrayAdapter<Recipe>(getActivity(), R.layout.grid_item, R.id.grid_text,needElements ){
+        gridadapter = new ArrayAdapter<Recipe>(getActivity(), R.layout.grid_item, R.id.grid_text, needElements) {
 
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -112,7 +112,7 @@ public class FavoriteFragment extends Fragment implements
                 textView.setText(needElements[position].title);
 
                 ImageView grid_picture = (ImageView) view.findViewById(R.id.grid_picture);
-                ImageLoader.getInstance().displayImage("http://handmadefood.ru/"+ needElements[position].general_image ,grid_picture);
+                ImageLoader.getInstance().displayImage("http://handmadefood.ru/" + needElements[position].general_image, grid_picture);
                 return view;
             }
         };

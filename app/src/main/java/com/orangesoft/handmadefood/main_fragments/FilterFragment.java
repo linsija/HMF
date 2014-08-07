@@ -37,7 +37,7 @@ public class FilterFragment extends Fragment {
     private FoodApplication application;
     private RestService restService;
     public DataBaseHandler dataBaseHandler;
-    public static Category[] allCategories ;
+    public static Category[] allCategories;
     private ListView listView;
     public String[] neednames;
     public CheckedList[] checkedList;
@@ -48,13 +48,12 @@ public class FilterFragment extends Fragment {
         dataBaseHandler = new DataBaseHandler(getActivity().getApplicationContext());
         try {
             serverLoader();
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
 
         }
     }
 
-    private void serverLoader(){
+    private void serverLoader() {
         new AsyncTask<Void, Void, String>() {
             @Override
             protected String doInBackground(Void... params) {
@@ -69,14 +68,13 @@ public class FilterFragment extends Fragment {
             protected void onPostExecute(String content) {
                 try {
                     onStart();
-                }
-                catch (Exception ex){
+                } catch (Exception ex) {
                 }
             }
         }.execute();
     }
 
-    public void getDataFromDB(String query){
+    public void getDataFromDB(String query) {
         SQLiteDatabase db = dataBaseHandler.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
@@ -92,13 +90,13 @@ public class FilterFragment extends Fragment {
 
         cursor.close();
         checkedList = new CheckedList[allCategories.length];
-        for (int i=0; i<allCategories.length; i++){
-            checkedList[i]= new CheckedList();
+        for (int i = 0; i < allCategories.length; i++) {
+            checkedList[i] = new CheckedList();
             checkedList[i].nameCategory = allCategories[i].name;
             checkedList[i].check = true;
         }
         listView = (ListView) getView().findViewById(R.id.listview);
-        ArrayAdapter<CheckedList> adapter = new ArrayAdapter<CheckedList>(getActivity().getApplicationContext(), simple_list_view, R.id.text1,checkedList ) {
+        ArrayAdapter<CheckedList> adapter = new ArrayAdapter<CheckedList>(getActivity().getApplicationContext(), simple_list_view, R.id.text1, checkedList) {
             @Override
             public View getView(final int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
@@ -108,12 +106,11 @@ public class FilterFragment extends Fragment {
                 checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (checkedList[position].check==true){
-                            checkedList[position].check=false;
+                        if (checkedList[position].check == true) {
+                            checkedList[position].check = false;
                             checkBox.setChecked(false);
-                        }
-                        else {
-                            checkedList[position].check=true;
+                        } else {
+                            checkedList[position].check = true;
                             checkBox.setChecked(true);
                         }
                     }
@@ -130,17 +127,18 @@ public class FilterFragment extends Fragment {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CATEGORY_NAME);
         db.execSQL("CREATE TABLE " + TABLE_CATEGORY_NAME + " (" + Id
                 + " INTEGER, " + Name + " TEXT NOT NULL,"
-                + Count +" INTEGER);" );
+                + Count + " INTEGER);");
 
-        for (int i=0; i<getcategory.length;i++){
+        for (int i = 0; i < getcategory.length; i++) {
             ContentValues values = new ContentValues();
             values.put(Id, getcategory[i].id);
-            values.put(Name, getcategory[i].name );
-            values.put(Count,getcategory[i].count );
+            values.put(Name, getcategory[i].name);
+            values.put(Count, getcategory[i].count);
 
             db.insertOrThrow(TABLE_CATEGORY_NAME, null, values);
         }
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(filter_recepts, null);
@@ -159,11 +157,11 @@ public class FilterFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        int one=0;
+        int one = 0;
         neednames = new String[checkedList.length];
-        for (int i =0; i<checkedList.length; i++){
-            if (checkedList[i].check==true){
-                neednames[one]=checkedList[i].nameCategory;
+        for (int i = 0; i < checkedList.length; i++) {
+            if (checkedList[i].check == true) {
+                neednames[one] = checkedList[i].nameCategory;
                 one++;
             }
 

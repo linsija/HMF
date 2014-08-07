@@ -12,7 +12,7 @@ public interface RestService {
     static final String HOST = "http://handmadefood.ru/api";
 
 //    @GET("/recipes.json")
- //   void getRecipe(Callback<Recipe[]> callback);
+    //   void getRecipe(Callback<Recipe[]> callback);
 
     @GET("/recipes.json")
     Recipe[] getRecipe();

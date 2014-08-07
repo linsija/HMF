@@ -11,9 +11,6 @@ public class Recipe {
     public String general_image;
     public String[] ingridients;
     public String[] ingridient_categories;
-    public  String[] food_categories;
+    public String[] food_categories;
     //public  String user;
-
-
-
 }

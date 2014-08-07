@@ -11,7 +11,7 @@ import com.orangesoft.handmadefood.R;
 /**
  * Created by Виолетта on 24.07.2014.
  */
-public class AboutFragment extends Fragment{
+public class AboutFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

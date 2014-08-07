@@ -5,6 +5,6 @@ package com.orangesoft.handmadefood.abstraction;
  */
 public class CheckedList {
 
-public  String nameCategory;
-public boolean check;
+    public String nameCategory;
+    public boolean check;
 }

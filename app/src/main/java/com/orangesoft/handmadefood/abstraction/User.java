@@ -8,6 +8,6 @@ public class User {
     public String type;
     public String avatar_medium;
     public String avatar_w220;
-   // public ArrayList<Restaurant> restaurants;
+    // public ArrayList<Restaurant> restaurants;
 
 }
