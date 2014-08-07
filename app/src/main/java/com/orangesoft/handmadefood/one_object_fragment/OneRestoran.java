@@ -59,7 +59,7 @@ public class OneRestoran extends Fragment {
 //        map.addMarker(new MarkerOptions());
 
         FragmentTransaction tr = getChildFragmentManager().beginTransaction();
-        tr.add(R.id.mapContainer, mapFragmnet);
+        tr.add(R.id.map, mapFragmnet);
         tr.commit();
 
         ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(R.string.restoran);

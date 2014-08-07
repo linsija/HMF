@@ -43,16 +43,21 @@ import static com.orangesoft.handmadefood.Constans.Type;
  */
 public class DataBaseHandler extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = SDCardPath.getExternalMounts() +"/Handmadefood.sqlite";
+
+    ;//SDCardPath.getExternalMounts() +"/Handmadefood.sqlite";
     private static final int DATABASE_VERSION = 1;
 
+    Context context;
 
     public DataBaseHandler(Context ctx) {
-        super(ctx, DATABASE_NAME, null, DATABASE_VERSION);
+        super(ctx,  ctx.getFilesDir().getPath()+"/Handmadefood.sqlite", null, DATABASE_VERSION);
+        this.context = ctx;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
+
         db.execSQL("CREATE TABLE " + TABLE_RECIPES_NAME + " (" + Id
                 + " INTEGER, " + Title + " TEXT NOT NULL,"+ Rss_title + " TEXT,"
                 + Content + " TEXT," + Cook_time + " TEXT,"

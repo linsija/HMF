@@ -638,7 +638,7 @@ public class SlidingMenu extends RelativeLayout {
 		} catch (Exception e) {
 			width = display.getWidth();
 		}
-		setBehindOffset(width-390);
+		setBehindOffset(width-i);
 	}
 
 	/**

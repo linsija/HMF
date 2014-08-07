@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.orangesoft.handmadefood.DataBaseHandler;
+import com.orangesoft.handmadefood.FilterClose;
 import com.orangesoft.handmadefood.FoodApplication;
 import com.orangesoft.handmadefood.R;
 import com.orangesoft.handmadefood.abstraction.Recipe;
@@ -48,7 +49,7 @@ import static com.orangesoft.handmadefood.Constans.Title;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class ReceptFragment extends Fragment implements
-        ActionBar.OnNavigationListener, ActionBar.TabListener{
+        ActionBar.OnNavigationListener, ActionBar.TabListener, FilterClose {
 
     private  GridView gvMain;
     private  ArrayAdapter<Recipe> gridadapter;
@@ -183,7 +184,6 @@ public class ReceptFragment extends Fragment implements
         if (item.getItemId() == R.id.itm) {
             ret = true;
             filterFragment = new FilterFragment();
-
             android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.conteiner, filterFragment);
@@ -247,6 +247,11 @@ public class ReceptFragment extends Fragment implements
 
     @Override
     public void onTabReselected(ActionBar.Tab tab, android.app.FragmentTransaction ft) {
+
+    }
+
+    @Override
+    public void onPreparedData(String[] needCategoriesNames) {
 
     }
 }

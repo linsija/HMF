@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.orangesoft.handmadefood.DataBaseHandler;
 import com.orangesoft.handmadefood.FoodApplication;
@@ -38,8 +39,8 @@ public class FilterFragment extends Fragment {
     public DataBaseHandler dataBaseHandler;
     public static Category[] allCategories ;
     private ListView listView;
-    public String neednames;
-    private CheckedList[] checkedList;
+    public String[] neednames;
+    public CheckedList[] checkedList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -87,25 +88,34 @@ public class FilterFragment extends Fragment {
             allCategories[countElem].name = cursor.getString(1);
             allCategories[countElem].count = cursor.getInt(2);
             countElem++;
-
         }
+
         cursor.close();
-        int one =0;
         checkedList = new CheckedList[allCategories.length];
         for (int i=0; i<allCategories.length; i++){
+            checkedList[i]= new CheckedList();
             checkedList[i].nameCategory = allCategories[i].name;
             checkedList[i].check = true;
         }
         listView = (ListView) getView().findViewById(R.id.listview);
-        ArrayAdapter<CheckedList> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext() ,  simple_list_view, R.id.text1, checkedList) {
+        ArrayAdapter<CheckedList> adapter = new ArrayAdapter<CheckedList>(getActivity().getApplicationContext(), simple_list_view, R.id.text1,checkedList ) {
             @Override
             public View getView(final int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
-                CheckBox checkBox = (CheckBox) view.findViewById(R.id.check);
+                TextView textView = (TextView) view.findViewById(R.id.text1);
+                textView.setText(checkedList[position].nameCategory);
+                final CheckBox checkBox = (CheckBox) view.findViewById(R.id.check);
                 checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
+                        if (checkedList[position].check==true){
+                            checkedList[position].check=false;
+                            checkBox.setChecked(false);
+                        }
+                        else {
+                            checkedList[position].check=true;
+                            checkBox.setChecked(true);
+                        }
                     }
                 });
                 return view;
@@ -149,8 +159,13 @@ public class FilterFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        for (int i =0; i<allCategories.length; i++){
-
+        int one=0;
+        neednames = new String[checkedList.length];
+        for (int i =0; i<checkedList.length; i++){
+            if (checkedList[i].check==true){
+                neednames[one]=checkedList[i].nameCategory;
+                one++;
+            }
 
         }
     }

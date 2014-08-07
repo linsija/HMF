@@ -26,11 +26,8 @@
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
         android:shadowColor="#000000"
-        android:shadowDx="1.0"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:shadowDy="1.0"
-        android:shadowRadius="29"
         android:gravity="right"
         tools:text="asd"
         android:textColor="#ffffff" />

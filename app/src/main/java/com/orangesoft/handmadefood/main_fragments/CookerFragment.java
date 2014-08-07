@@ -103,10 +103,10 @@ public class CookerFragment  extends Fragment  implements
         getActivity().getActionBar().setSelectedNavigationItem(0);
         String FROM1 = "Id, First_name, Surname, About_me, Type, Avatar_medium, Avatar_w220";
         String query = "SELECT " + FROM1 + " FROM " + TABLE_USER_NAME;
-        setDataInDB(query);
+        getDataFromDB(query);
     }
 
-    public void setDataInDB(String query){
+    public void getDataFromDB(String query){
         SQLiteDatabase db = dataBaseHandler.getWritableDatabase();
         Cursor cursor2 = db.rawQuery(query, null);
         allAvtors = new User[cursor2.getCount()];
@@ -175,21 +175,21 @@ public class CookerFragment  extends Fragment  implements
             {
                 String FROM1 = "Id, First_name, Surname, About_me, Type, Avatar_medium, Avatar_w220";
                 String query = "SELECT " + FROM1 + " FROM " + TABLE_USER_NAME;
-                setDataInDB(query);
+                getDataFromDB(query);
                 break;
             }
             case 1:{
 
                 String FROM1 = "Id, First_name, Surname, About_me, Type, Avatar_medium, Avatar_w220";
                 String query = "SELECT " + FROM1 + " FROM " + TABLE_USER_NAME +" WHERE "+ Type +" LIKE 'Chie%' " ;
-                setDataInDB(query);
+                getDataFromDB(query);
                 break;}
             case 2:{
                 String FROM1 = "Id, First_name, Surname, About_me, Type, Avatar_medium, Avatar_w220";
                 String query = "SELECT " + FROM1 + " FROM " + TABLE_USER_NAME +" WHERE "+ Type +" LIKE 'Coo%' " ;
 
 
-                setDataInDB(query);
+                getDataFromDB(query);
                 break;}
         }
         return false;

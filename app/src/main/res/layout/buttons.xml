@@ -6,21 +6,20 @@
     android:layout_weight="1">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|left"
         android:id="@+id/recept_layout"
         android:orientation="horizontal">
-        <ImageButton
+        <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/recepts"
-            android:layout_weight="0.2"
             android:background="@drawable/recepts1"
             />
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:gravity="center"
+            android:layout_height="wrap_content"
             android:textColor="#ffffff"
             android:text="@string/recepts"/>
         </LinearLayout>
@@ -28,27 +27,26 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="1px"
-        android:background="@drawable/gray_line"
+        android:background="#696969"
         />
 
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|left"
         android:orientation="horizontal"
         android:id="@+id/restorans_layout">
 
-        <ImageButton
+        <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/restorans"
-            android:layout_weight="0.2"
             android:background="@drawable/restorans"
             />
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:gravity="center"
+            android:layout_height="wrap_content"
             android:textColor="#ffffff"
             android:text="@string/restorans"/>
     </LinearLayout>
@@ -56,25 +54,24 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="1px"
-        android:background="@drawable/gray_line"
+        android:background="#696969"
         />
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|left"
         android:id="@+id/coockers_layout"
         android:orientation="horizontal">
-        <ImageButton
+        <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/coockers"
-            android:layout_weight="0.2"
             android:background="@drawable/coockers"
             />
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:gravity="center"
+            android:layout_height="wrap_content"
             android:textColor="#ffffff"
             android:text="@string/avtors"/>
     </LinearLayout>
@@ -82,24 +79,23 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="1px"
-        android:background="@drawable/gray_line"
+        android:background="#696969"
         />
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|left"
         android:id="@+id/search_layout"
         android:orientation="horizontal">
-        <ImageButton
+        <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/search"
-            android:layout_weight="0.2"
             android:background="@drawable/search"
         />
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:gravity="center"
+            android:layout_height="wrap_content"
             android:textColor="#ffffff"
             android:text="@string/search"/>
     </LinearLayout>
@@ -107,24 +103,23 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="1px"
-        android:background="@drawable/gray_line"
+        android:background="#696969"
         />
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|left"
         android:id="@+id/favorites_layout"
         android:orientation="horizontal">
-    <ImageButton
+    <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/favorites"
-        android:layout_weight="0.2"
         android:background="@drawable/favorites"
         />
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:gravity="center"
+        android:layout_height="wrap_content"
         android:textColor="#ffffff"
         android:text="@string/favorite"/>
 </LinearLayout>

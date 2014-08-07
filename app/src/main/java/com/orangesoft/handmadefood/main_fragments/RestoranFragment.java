@@ -115,7 +115,7 @@ private void serverLoader(){
         getActivity().getActionBar().setSelectedNavigationItem(0);
         String FROM1 = "Id, Title, About, Address, Latitude, Longitude,  Slug, Contacts, Image_big, Image_square";
         String query = "SELECT " + FROM1 + " FROM " + TABLE_RESTORAN_NAME;
-        setDataInDB(query);
+        getDataFromDB(query);
 
     }
 
@@ -139,27 +139,27 @@ private void serverLoader(){
             {
                 String FROM1 = "Id, Title, About, Address, Latitude, Longitude,  Slug, Contacts, Image_big, Image_square";
                 String query = "SELECT " + FROM1 + " FROM " + TABLE_RESTORAN_NAME;
-                setDataInDB(query);
+                getDataFromDB(query);
                 break;
             }
             case 1:{
 
                 String FROM1 = "Id, Title, About, Address, Latitude, Longitude,  Slug, Contacts, Image_big, Image_square";
                 String query = "SELECT " + FROM1 + " FROM " + TABLE_RESTORAN_NAME +" WHERE "+ Address +" LIKE 'г.М%' " ;
-                setDataInDB(query);
+                getDataFromDB(query);
                 break;}
             case 2:{
                 String FROM1 = "Id, Title, About, Address, Latitude, Longitude,  Slug, Contacts, Image_big, Image_square";
                 String query = "SELECT " + FROM1 + " FROM " + TABLE_RESTORAN_NAME +" WHERE "+ Address +" LIKE 'г.С%' " ;
 
 
-                setDataInDB(query);
+                getDataFromDB(query);
                 break;}
         }
         return false;
     }
 
-public void setDataInDB(String query){
+public void getDataFromDB(String query){
     SQLiteDatabase db = dataBaseHandler.getWritableDatabase();
     Cursor cursor = db.rawQuery(query, null);
 

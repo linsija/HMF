@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
@@ -19,12 +19,11 @@ import com.orangesoft.handmadefood.main_fragments.SearchFragment;
 
 public class MainActivity extends ActionBarActivity implements Navigations {
 
-    ImageButton recepts;
-    ImageButton restorans;
-    ImageButton coockers;
-    ImageButton search;
-    ImageButton favorites;
-
+    ImageView recepts;
+    ImageView restorans;
+    ImageView coockers;
+    ImageView search;
+    ImageView favorites;
 
     LinearLayout  recept_layout;
     LinearLayout  restorans_layout;
@@ -60,17 +59,22 @@ public class MainActivity extends ActionBarActivity implements Navigations {
         menu.setMenu(R.layout.sidemenu);
         menu.setBehindWidthRes(R.dimen.slidingmenu_behind_width);
 
-        recepts = (ImageButton) findViewById(R.id.recepts);
-        restorans = (ImageButton) findViewById(R.id.restorans);
-        coockers = (ImageButton) findViewById(R.id.coockers);
-        search = (ImageButton) findViewById(R.id.search);
-        favorites = (ImageButton) findViewById(R.id.favorites);
+        recepts = (ImageView) findViewById(R.id.recepts);
+        restorans = (ImageView) findViewById(R.id.restorans);
+        coockers = (ImageView) findViewById(R.id.coockers);
+        search = (ImageView) findViewById(R.id.search);
+        favorites = (ImageView) findViewById(R.id.favorites);
 
         recept_layout = (LinearLayout) findViewById(R.id.recept_layout);
+        recept_layout.setClickable(true);
         restorans_layout = (LinearLayout) findViewById(R.id.restorans_layout);
+        recept_layout.setClickable(true);
         coockers_layout = (LinearLayout) findViewById(R.id.coockers_layout);
+        coockers_layout.setClickable(true);
         search_layout = (LinearLayout) findViewById(R.id.search_layout);
+        search_layout.setClickable(true);
         favorites_layout = (LinearLayout) findViewById(R.id.favorites_layout);
+        favorites_layout.setClickable(true);
 
         receptFragment = new ReceptFragment();
         restoranFragment = new RestoranFragment();
