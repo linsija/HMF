@@ -50,7 +50,7 @@ public class SearchFragment extends Fragment implements
 
     private static final String LOG_TAG = "log";
     private String[] data = new String[]{"Все рецепты", "Все рестораны", "Все повара"};
-    public DataBaseHandler dataBaseHandler;
+    private DataBaseHandler dataBaseHandler;
 
     private FoodApplication application;
     private RestService restService;
@@ -64,13 +64,7 @@ public class SearchFragment extends Fragment implements
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         dataBaseHandler = new DataBaseHandler(getActivity().getApplicationContext());
-        ActionBar bar = getActivity().getActionBar();
-        bar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplication().getApplicationContext(),
-                android.R.layout.simple_spinner_item, data);
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        bar.setListNavigationCallbacks(adapter, this);
         flag = 0;
     }
 
@@ -519,5 +513,15 @@ public class SearchFragment extends Fragment implements
         }
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        ActionBar bar = getActivity().getActionBar();
+        bar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplication().getApplicationContext(),
+                android.R.layout.simple_spinner_item, data);
 
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        bar.setListNavigationCallbacks(adapter, this);
+    }
 }

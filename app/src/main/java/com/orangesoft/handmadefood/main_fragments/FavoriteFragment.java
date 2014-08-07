@@ -38,7 +38,7 @@ public class FavoriteFragment extends Fragment implements
 
     public static FavoriteRecipe[] favoriteRecipes;
     private static Recipe[] needElements;
-    public DataBaseHandler dataBaseHandler;
+    private DataBaseHandler dataBaseHandler;
     private GridView gvMain;
     private ArrayAdapter<Recipe> gridadapter;
     AboutFragment aboutFragment;

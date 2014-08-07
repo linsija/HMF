@@ -1,35 +1,41 @@
 package com.orangesoft.handmadefood.one_object_fragment;
 
 
-import android.graphics.Color;
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.orangesoft.handmadefood.MyMapFragment;
+import com.orangesoft.handmadefood.MainActivity;
 import com.orangesoft.handmadefood.R;
 import com.orangesoft.handmadefood.main_fragments.RestoranFragment;
 
 public class OneRestoran extends Fragment {
 
-    TextView description;
-    TextView adress;
+
     int numberItemRestoran;
     TextView restoranAdress;
     TextView email;
     ImageView restoranPicture;
     TextView restoranName;
     TextView restoranAbout;
-    private MyMapFragment mapFragmnet;
+
+
+    private static GoogleMap mMap;
+    private static Double latitude, longitude;
 
 
     @Override
@@ -40,77 +46,118 @@ public class OneRestoran extends Fragment {
         numberItemRestoran = bundle.getInt("currentPositionRestoran");
 
 
-
     }
 
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        ActionBar bar = getActivity().getActionBar();
+        bar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.one_restoran, null);
 
-        mapFragmnet = new MyMapFragment(new Runnable() {
+        TabHost tabHost = (TabHost) v.findViewById(android.R.id.tabhost);
+        tabHost.setup();
+
+        TabHost.TabSpec tabSpec;
+
+        tabSpec = tabHost.newTabSpec("tag1");
+        tabSpec.setIndicator("Описание");
+        tabSpec.setContent(R.id.restoran_layout);
+        tabHost.addTab(tabSpec);
+
+        tabSpec = tabHost.newTabSpec("tag2");
+        tabSpec.setIndicator("Адрес");
+        tabSpec.setContent(R.id.adress_layout);
+        tabHost.addTab(tabSpec);
+
+        tabHost.setCurrentTabByTag("tag1");
+
+
+
+/*        mapFragmnet = new MyMapFragment(new Runnable() {
             @Override
             public void run() {
                 mapFragmnet.getMap();
             }
         });
-//        GoogleMap map = mapFragmnet.getMap();
-//        map.addMarker(new MarkerOptions());
+        GoogleMap map = mapFragmnet.getMap();
+        map.addMarker(new MarkerOptions());
 
         FragmentTransaction tr = getChildFragmentManager().beginTransaction();
         tr.add(R.id.map, mapFragmnet);
-        tr.commit();
+        tr.commit(); */
 
         ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(R.string.restoran);
         ((ActionBarActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         ((ActionBarActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(false);
 
-        description = (TextView) v.findViewById(R.id.description_restoran);
-        adress = (TextView) v.findViewById(R.id.adress_restoran);
         restoranAdress = (TextView) v.findViewById(R.id.adress);
         email = (TextView) v.findViewById(R.id.email);
         restoranName = (TextView) v.findViewById(R.id.textView);
         restoranPicture = (ImageView) v.findViewById(R.id.restoran_picture);
         restoranAbout = (TextView) v.findViewById(R.id.textView3);
-
-        final RelativeLayout description_layout = (RelativeLayout) v.findViewById(R.id.description_layout_restoran);
-        final RelativeLayout adress_layout = (RelativeLayout) v.findViewById(R.id.adress_layout);
-
-         description_layout.setVisibility(View.VISIBLE);
-        adress_layout.setVisibility(View.INVISIBLE);
         restoranAdress.setText(RestoranFragment.allRestorans[numberItemRestoran].address);
         email.setText(RestoranFragment.allRestorans[numberItemRestoran].contacts[0]);
         ImageLoader.getInstance().displayImage("http://handmadefood.ru/"+ RestoranFragment.allRestorans[numberItemRestoran].image_big , restoranPicture);
         restoranName.setText(RestoranFragment.allRestorans[numberItemRestoran].title);
         restoranAbout.setText(Html.fromHtml(RestoranFragment.allRestorans[numberItemRestoran].about));
+        latitude =(double) RestoranFragment.allRestorans[numberItemRestoran].latitude;
+        longitude = (double) RestoranFragment.allRestorans[numberItemRestoran].longitude;
 
-        description.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                description.setBackgroundColor(Color.parseColor("#ffffff"));
-                adress.setBackgroundColor(Color.parseColor("#696969"));
-                description.setTextColor(Color.parseColor("#111111"));
-                adress.setTextColor(Color.parseColor("#8B0000"));
-                description_layout.setVisibility(View.VISIBLE);
-                adress_layout.setVisibility(View.INVISIBLE);
-            }
-        });
-
-        adress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                description.setBackgroundColor(Color.parseColor("#696969"));
-                adress.setBackgroundColor(Color.parseColor("#ffffff"));
-
-                description.setTextColor(Color.parseColor("#8B0000"));
-                adress.setTextColor(Color.parseColor("#111111"));
-                description_layout.setVisibility(View.INVISIBLE);
-                adress_layout.setVisibility(View.VISIBLE);
-            }
-        });
-
+        setUpMapIfNeeded();
 
         return v;
+    }
+
+    public static void setUpMapIfNeeded() {
+        // Do a null check to confirm that we have not already instantiated the map.
+        if (mMap == null) {
+            // Try to obtain the map from the SupportMapFragment.
+            mMap = ((SupportMapFragment) MainActivity.fragmentManager
+                    .findFragmentById(R.id.location_map)).getMap();
+            // Check if we were successful in obtaining the map.
+            if (mMap != null)
+                setUpMap();
+        }
+    }
+
+    private static void setUpMap() {
+        // For showing a move to my loction button
+        mMap.setMyLocationEnabled(true);
+        // For dropping a marker at a point on the Map
+        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("My Home").snippet("Home Address"));
+        // For zooming automatically to the Dropped PIN Location
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,
+                longitude), 12.0f));
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (mMap != null)
+            setUpMap();
+
+        if (mMap == null) {
+            // Try to obtain the map from the SupportMapFragment.
+            mMap = ((SupportMapFragment)  MainActivity.fragmentManager.findFragmentById(R.id.location_map)).getMap();
+            // Check if we were successful in obtaining the map.
+            if (mMap != null)
+                setUpMap();
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (mMap != null) {
+            MainActivity.fragmentManager.beginTransaction()
+                    .remove(MainActivity.fragmentManager.findFragmentById(R.id.location_map)).commit();
+            mMap = null;
+        }
     }
 }

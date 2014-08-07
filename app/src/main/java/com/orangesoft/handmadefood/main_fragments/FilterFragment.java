@@ -1,5 +1,6 @@
 package com.orangesoft.handmadefood.main_fragments;
 
+import android.app.ActionBar;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -36,7 +37,7 @@ public class FilterFragment extends Fragment {
 
     private FoodApplication application;
     private RestService restService;
-    public DataBaseHandler dataBaseHandler;
+    private DataBaseHandler dataBaseHandler;
     public static Category[] allCategories;
     private ListView listView;
     public String[] neednames;
@@ -52,6 +53,7 @@ public class FilterFragment extends Fragment {
 
         }
     }
+
 
     private void serverLoader() {
         new AsyncTask<Void, Void, String>() {
@@ -148,6 +150,8 @@ public class FilterFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        ActionBar bar = getActivity().getActionBar();
+        bar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         String FROM1 = "Id, Name, Count";
         String query = "SELECT " + FROM1 + " FROM " + TABLE_CATEGORY_NAME;
         getDataFromDB(query);

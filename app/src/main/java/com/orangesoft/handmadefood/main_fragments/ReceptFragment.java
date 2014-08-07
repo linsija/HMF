@@ -59,7 +59,7 @@ public class ReceptFragment extends Fragment implements
     private RestService restService;
 
     public static Recipe[] allRecipes;
-    public DataBaseHandler dataBaseHandler;
+    private DataBaseHandler dataBaseHandler;
 
 
     @Override
@@ -67,8 +67,7 @@ public class ReceptFragment extends Fragment implements
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         dataBaseHandler = new DataBaseHandler(getActivity().getApplicationContext());
-        ActionBar bar = getActivity().getActionBar();
-        bar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+
         try {
             serverLoader();
         } catch (Exception ex) {
@@ -100,6 +99,8 @@ public class ReceptFragment extends Fragment implements
 
     @Override
     public void onStart() {
+        ActionBar bar = getActivity().getActionBar();
+        bar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         SQLiteDatabase db = dataBaseHandler.getWritableDatabase();
         String FROM1 = "Id ,Title,Rss_title, Content, Cook_time, Servings_number, Slug, General_image, Ingredients, Ingredient_categories, Food_categories"; //
         String query = "SELECT " + FROM1 + " FROM " + TABLE_RECIPES_NAME;

@@ -41,8 +41,7 @@ public class RestoranFragment extends Fragment implements
         ActionBar.OnNavigationListener {
 
     private static final String LOG_TAG = "log";
-    public static int number_item_restoran;
-    public DataBaseHandler dataBaseHandler;
+    private DataBaseHandler dataBaseHandler;
     private GridView gvMain;
     private ArrayAdapter<Restaurant> gridadapter;
     private OneRestoran oneRestoran;
@@ -50,7 +49,6 @@ public class RestoranFragment extends Fragment implements
 
     private FoodApplication application;
     private RestService restService;
-
     private String[] data = new String[]{"Все рестораны", "Москва", "Петербург"};
 
 
@@ -58,16 +56,9 @@ public class RestoranFragment extends Fragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        number_item_restoran = 0;
         dataBaseHandler = new DataBaseHandler(getActivity().getApplicationContext());
 
-        ActionBar bar = getActivity().getActionBar();
-        bar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplication().getApplicationContext(),
-                android.R.layout.simple_spinner_item, data);
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        bar.setListNavigationCallbacks(adapter, this);
 
         try {
             serverLoader();
@@ -101,6 +92,13 @@ public class RestoranFragment extends Fragment implements
     @Override
     public void onStart() {
         super.onStart();
+        ActionBar bar = getActivity().getActionBar();
+        bar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplication().getApplicationContext(),
+                android.R.layout.simple_spinner_item, data);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        bar.setListNavigationCallbacks(adapter, this);
         getActivity().getActionBar().setSelectedNavigationItem(0);
         String FROM1 = "Id, Title, About, Address, Latitude, Longitude,  Slug, Contacts, Image_big, Image_square";
         String query = "SELECT " + FROM1 + " FROM " + TABLE_RESTORAN_NAME;
@@ -132,7 +130,6 @@ public class RestoranFragment extends Fragment implements
                 break;
             }
             case 1: {
-
                 String FROM1 = "Id, Title, About, Address, Latitude, Longitude,  Slug, Contacts, Image_big, Image_square";
                 String query = "SELECT " + FROM1 + " FROM " + TABLE_RESTORAN_NAME + " WHERE " + Address + " LIKE 'г.М%' ";
                 getDataFromDB(query);
@@ -141,8 +138,6 @@ public class RestoranFragment extends Fragment implements
             case 2: {
                 String FROM1 = "Id, Title, About, Address, Latitude, Longitude,  Slug, Contacts, Image_big, Image_square";
                 String query = "SELECT " + FROM1 + " FROM " + TABLE_RESTORAN_NAME + " WHERE " + Address + " LIKE 'г.С%' ";
-
-
                 getDataFromDB(query);
                 break;
             }
